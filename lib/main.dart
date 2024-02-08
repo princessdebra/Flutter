@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/constant.dart';
+import 'package:flutter_application_1/custombutton.dart';
 import 'package:flutter_application_1/customtext.dart';
+import 'package:flutter_application_1/customtextfield.dart';
+// ignore: unused_import
+import 'package:get/get_connect/http/src/utils/utils.dart';
 
 
 void main() {
   runApp(const MaterialApp(
     home: Home(),
+    debugShowCheckedModeBanner: false,
   ));
 }
 
@@ -14,40 +19,66 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // ignore: non_constant_identifier_names
-    TextEditingController UsernameController = TextEditingController();
+    final TextEditingController usernameController = TextEditingController();
+    final TextEditingController passwordController = TextEditingController();
     return Scaffold(
       appBar: AppBar(
-        // ignore: prefer_const_constructors
-        title: Text("login page"),
+        title: const Customtext(
+          label: "DU App",
+          labelColor: appWhite,
+          fontsize: 28, fontWeight: FontWeight.bold,
+        ),
         backgroundColor: primaryColor,
         foregroundColor: appWhite,
       ),
-      // ignore: prefer_const_constructors
-      body: Padding(
-        padding: const EdgeInsets.fromLTRB(50, 30, 50,30),
+      body: SingleChildScrollView(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row( mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset("/images/logodaystar.jpeg",),
-              ],
-            ),
-          // ignore: prefer_const_constructors
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children:const [ Customtext(label: "Login Screen", labelColor: primaryColor, fontsize: 30)]),
-         SizedBox(height: 20,),
-         const Customtext(
-            label: 'Username',
-          ),
-          TextField(
-            controller: UsernameController,
-          ),
-          const Customtext(label: 'Password',),
-        ]),
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: Image.asset(
+                  "logodaystar.jpeg",
+                  height: 80,
+                  width: 80,
+                ),
+              ),
+              const Center(
+                child: Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Customtext(
+                    label: "Login Screen",
+                    fontsize: 30,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Customtext(
+                  label: "Username",
+                  labelColor: Colors.blue, fontWeight: FontWeight.bold,
+                ),
+              ),
+              CustomTextField(
+                  customTextFieldController: usernameController,
+                  hintText: "Enter your username",
+                  prefixIcon: const Icon(Icons.person)),
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Customtext(label: "Password", fontWeight:FontWeight.bold ),
+              ),
+              CustomTextField(
+                customTextFieldController: passwordController,
+                hintText: "Enter your password",
+                prefixIcon: const Icon(Icons.lock),
+                obscuredPassword: true,
+                isPassword: true,
+              ),
+              const CustomTextButton(
+                buttonName: "Log In",
+              )
+            ]),
       ),
     );
   }
