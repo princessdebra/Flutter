@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/constant.dart';
+import 'package:flutter_application_1/configs/constant.dart';
 
 class CustomTextButton extends StatelessWidget {
   final String buttonName;
@@ -7,6 +7,7 @@ class CustomTextButton extends StatelessWidget {
   final Color textColor; // New field for the text color
   final double buttonWidth;
   final double buttonHeight;
+  final VoidCallback action;
 
   const CustomTextButton({
     super.key,
@@ -15,12 +16,13 @@ class CustomTextButton extends StatelessWidget {
     this.textColor = Colors.white, // Default text color is black
     this.buttonHeight =  40,
     this.buttonWidth =  200,
+    required this.action
   });
 
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: () {},
+      onPressed: action,
       child: Container(
         width: buttonWidth,
         height: buttonHeight,

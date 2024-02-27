@@ -1,21 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/constant.dart';
-import 'package:flutter_application_1/custombutton.dart';
+import 'package:flutter_application_1/configs/constant.dart';
+import 'package:flutter_application_1/views/custombutton.dart';
 import 'package:flutter_application_1/customtext.dart';
 import 'package:flutter_application_1/customtextfield.dart';
+import 'package:get/get.dart';
 // ignore: unused_import
 import 'package:get/get_connect/http/src/utils/utils.dart';
 
 
-void main() {
-  runApp(const MaterialApp(
-    home: Home(),
-    debugShowCheckedModeBanner: false,
-  ));
-}
+//
 
-class Home extends StatelessWidget {
-  const Home({super.key});
+class Login extends StatelessWidget {
+  const Login({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,13 +21,13 @@ class Home extends StatelessWidget {
       appBar: AppBar(
         title: const Center(
           child: Customtext(
-            label: "DU App",
+            label: "NOTEPAD",
             labelColor: appWhite,
             fontsize: 28, fontWeight: FontWeight.bold,
             
           ),
         ),
-        backgroundColor: primaryColor,
+        backgroundColor: Color.fromARGB(255, 244, 108, 154),
         foregroundColor: appWhite,
       ),
       body: SingleChildScrollView(
@@ -43,7 +39,7 @@ class Home extends StatelessWidget {
               children: [
                 Center(
                   child: Image.asset(
-                    "assets/images/daystarrrrlogo.png",
+                    "assets/images/Notes icon.jpeg",
                     height: 80,
                     width: 80,
                   ),
@@ -58,11 +54,17 @@ class Home extends StatelessWidget {
                     ),
                   ),
                 ),
+                
+                Customtext
+                (label: "Welcome back you!", 
+                fontsize: 30,
+                fontWeight: FontWeight.normal, labelColor: const Color.fromARGB(255, 244, 108, 154),),
+
                 const Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Customtext(
                     label: "Username",
-                    labelColor: Colors.blue, fontWeight: FontWeight.bold,
+                    labelColor: Color.fromARGB(255, 244, 108, 154), fontWeight: FontWeight.bold,
                   ),
                 ),
                 CustomTextField(
@@ -71,7 +73,7 @@ class Home extends StatelessWidget {
                     prefixIcon: const Icon(Icons.person)),
                 const Padding(
                   padding: EdgeInsets.all(8.0),
-                  child: Customtext(label: "Password",labelColor: Colors.blue, fontWeight:FontWeight.bold ),
+                  child: Customtext(label: "Password",labelColor: Color.fromARGB(255, 244, 108, 154) , fontWeight:FontWeight.bold ),
                 ),
                 CustomTextField(
                   customTextFieldController: passwordController,
@@ -80,14 +82,36 @@ class Home extends StatelessWidget {
                   obscuredPassword: true,
                   isPassword: true,
                 ),
-                const CustomTextButton(
+                 CustomTextButton(
                   buttonName: "Log In",
-                  color: Colors.blue,
+                  color: Color.fromARGB(255, 244, 108, 154),
                   textColor: Colors.white,
-                )
-              ]),
+                  action:navigateToDashboard,
+                ),
+                 Row(
+                   children: [
+                     GestureDetector(
+                      onTap: (){
+                        Navigator.pushNamed(context,'/Registrationscreen');
+                      },
+                      child:
+                      const Customtext(
+                        label: "Not a member?",
+                        labelColor:Colors.black ,
+                        fontWeight: FontWeight.bold,
+                        fontsize: 16),),
+               ] ),
+                   ],
+                 )
+          
+          ),
         ),
-      ),
+      
     );
   }
-}
+     void navigateToDashboard(){
+    Get.toNamed("/dashboardscreen");       
+  }
+  
+  }
+  
